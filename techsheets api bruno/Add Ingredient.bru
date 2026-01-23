@@ -1,0 +1,22 @@
+meta {
+  name: Add Ingredient
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/ingredient
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"Oeuf"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

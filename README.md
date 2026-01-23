@@ -13,9 +13,10 @@ This project is intended to work with a this [front end](https://github.com/elko
 
 ## Project dependencies
 
-Before using Techsheets api , ensure you have:
+Before using Techsheets api , ensure you have thes installed:
 
-* Go
+* [Go](https://go.dev/doc/tutorial/getting-started)
+* [Air](https://github.com/air-verse/air)
 
 
 ## Instructions for using {Project Name}
@@ -31,7 +32,7 @@ Get started with Techsheets Api by {write the first step a user needs to start u
 
 2. run the api
 
-    ``` go run 
+    ``` air
   ```
 
 ## Contributing guidelines

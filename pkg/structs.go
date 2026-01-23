@@ -2,34 +2,33 @@ package pkg
 
 import (
 	"time"
-
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 // DOMAIN
-type Ingredient struct {
-	UUID          uuid.UUID
-	Name          string
-	Label         string
-	Allergen      string
-	Unit          string
-	HT_Price      float64
-	TTC_price     float64
-	TVA_rate      float64
-	Supplier      string
-}
+// type Ingredient struct {
+// 	UUID          uuid.UUID
+// 	Name          string
+// 	Label         string
+// 	Allergen      string
+// 	Unit          string
+// 	HT_Price      float64
+// 	TTC_price     float64
+// 	TVA_rate      float64
+// 	Supplier      string
+// }
 
-type IngredientDB struct {
+type Ingredient struct {
 	gorm.Model
-	Name          string
-	Label         string
-	Allergen      string
-	Unit          string
-	HT_Price      float64
-	TTC_price     float64
-	TVA_rate      float64
-	Supplier      string
+	Name          string `form:"name" json:"name" `
+	Label         string `form:"label" json:"label"`
+	Allergen      string `form:"allergen" json:"allergen"`
+	Unit          string `form:"unit" json:"unit"`
+	HT_Price      float64`form:"htPrice" json:"htPrice"`
+	TTC_price     float64 `form:"ttcPrice" json:"ttcPrice"`
+	TVA_rate      float64 `form:"tvaRate" json:"tvaRate"`
+	Supplier      string `form:"supplier" json:"supplier"`
 }
 
 type RecipeIngredient struct {
