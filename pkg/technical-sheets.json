@@ -1,0 +1,208 @@
+{
+  "recipe": {
+    "id": "recipe_001",
+    "title": "Tarte à la framboise",
+    "description": "Une délicieuse tarte aux framboises avec croûte beurre et ganache au chocolat",
+    "difficulty": "intermediate",
+    "image": "https://empreintesucree.fr/wp-content/uploads/2019/07/1-tarte-chocolat-framboises-recette-patisserie-empreinte-sucree.jpg.webp",
+    "sketch": "../assets/frambroise_sketch.png",
+    "yield": {
+      "servings": 8,
+      "portions": {
+        "type": "slice",
+        "quantity": 8
+      }
+    },
+    "categories": [
+      "Dessert",
+      "Pâtisserie"
+    ],
+    "tags": [
+      "Fruit",
+      "Chocolat",
+      "Sans lactose possible"
+    ],
+    "mold": {
+      "shape": "cercle",
+      "dimensions": {
+        "length": 20,
+        "width": 20,
+        "depth": 5,
+        "unit": "cm"
+      }
+    },
+    "timings": {
+      "preparation": {
+        "duration": 30,
+        "unit": "minutes"
+      },
+      "cooking": {
+        "duration": 20,
+        "unit": "minutes"
+      },
+      "baking": {
+        "duration": 20,
+        "unit": "minutes",
+        "temperature": {
+          "value": 200,
+          "unit": "celsius"
+        }
+      },
+      "resting": {
+        "duration": 100,
+        "unit": "minutes",
+        "description": "Refroidissement complet avant démoulage"
+      },
+      "totalTime": 170,
+      "totalUnit": "minutes"
+    },
+    "equipment": [
+      "Robot pâtissier",
+      "Moule carré 20x20cm",
+      "Rouleau à pâtisserie",
+      "Film alimentaire"
+    ],
+    "ingredients": [
+      {
+        "group": "Pâte brisée",
+        "items": [
+          {
+            "id": "ing_001",
+            "name": "Oeufs",
+            "quantity": 3,
+            "unit": "pièce",
+            "unitPrice": 0.30,
+            "totalPrice": 0.90,
+            "optional": false,
+            "allergens": [
+              "Oeuf"
+            ],
+            "notes": "À température ambiante"
+          },
+          {
+            "id": "ing_002",
+            "name": "Farine de blé",
+            "quantity": 250,
+            "unit": "g",
+            "unitPrice": 0.04,
+            "totalPrice": 10.00,
+            "optional": false,
+            "allergens": [
+              "Gluten"
+            ],
+            "notes": "T55 recommandée"
+          },
+          {
+            "id": "ing_003",
+            "name": "Beurre",
+            "quantity": 150,
+            "unit": "g",
+            "unitPrice": 0.12,
+            "totalPrice": 18.00,
+            "optional": false,
+            "allergens": [
+              "Lactose"
+            ],
+            "notes": "Beurre froid coupé en dés"
+          },
+          {
+            "id": "ing_004",
+            "name": "Sucre glace",
+            "quantity": 50,
+            "unit": "g",
+            "unitPrice": 0.03,
+            "totalPrice": 1.50,
+            "optional": false,
+            "allergens": [],
+            "notes": ""
+          }
+        ]
+      },
+      {
+        "group": "Garniture",
+        "items": [
+          {
+            "id": "ing_005",
+            "name": "Framboises fraîches",
+            "quantity": 400,
+            "unit": "g",
+            "unitPrice": 0.05,
+            "totalPrice": 20.00,
+            "optional": false,
+            "allergens": [],
+            "notes": "De préférence bio"
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "Préparer la pâte brisée",
+        "duration": 15,
+        "unit": "minutes",
+        "description": "Combinez la farine, le sucre glace et le sel dans le bol du robot équipé de la lame. Ajoutez le beurre et mixez jusqu'à ce que le mélange ressemble à du sable grossier. Ajoutez les jaunes d'œufs et 3 cuillères à soupe de crème et mixez juste jusqu'à ce que la pâte commence à se former. Ajoutez plus de crème si nécessaire mais arrêtez avant que la pâte ne soit trop humide.",
+        "ingredients": [
+          "ing_001",
+          "ing_002",
+          "ing_003",
+          "ing_004"
+        ],
+        "equipment": [
+          "Robot pâtissier"
+        ],
+        "notes": "Ne pas surtravailler la pâte"
+      },
+      {
+        "order": 2,
+        "title": "Repos de la pâte",
+        "duration": 120,
+        "unit": "minutes",
+        "description": "Séparez la pâte en deux disques égaux et enveloppez-les dans du film alimentaire. Réfrigérez au minimum 2 heures.",
+        "ingredients": [],
+        "equipment": [
+          "Film alimentaire"
+        ],
+        "notes": "Peut être préparée 24h à l'avance"
+      },
+      {
+        "order": 3,
+        "title": "Cuisson du fond",
+        "duration": 20,
+        "unit": "minutes",
+        "description": "Étalez la pâte dans le moule. Piquez le fond avec une fourchette. Enfournez à 200°C pour 20 minutes.",
+        "ingredients": [],
+        "equipment": [
+          "Moule carré 20x20cm"
+        ],
+        "notes": "Le fond doit être doré mais pas trop sec"
+      },
+      {
+        "order": 4,
+        "title": "Disposition des framboises",
+        "duration": 5,
+        "unit": "minutes",
+        "description": "Disposez les framboises fraîches uniformément sur le fond cuit.",
+        "ingredients": [
+          "ing_005"
+        ],
+        "equipment": [],
+        "notes": "Faire cette étape au dernier moment pour garder les framboises croquantes"
+      }
+    ],
+    "cost": {
+      "ingredients": 50.40,
+      "labor": 15.00,
+      "total": 65.40,
+      "currency": "EUR",
+      "unitCost": 8.18
+    },
+    "metadata": {
+      "createdAt": "2024-01-15T10:30:00Z",
+      "updatedAt": "2024-01-15T10:30:00Z",
+      "author": "Chef Pâtissier",
+      "version": "1.0",
+      "status": "published"
+    }
+  }
+}
