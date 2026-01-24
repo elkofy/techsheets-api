@@ -27,12 +27,14 @@ Get started with Techsheets Api by {write the first step a user needs to start u
 
 1. intialize package
 
-  ``` go mod init 
+  ```bash 
+   go mod init 
   ```
 
 2. run the api
 
-    ``` air
+  ```bash 
+     air
   ```
 
 ## Contributing guidelines
