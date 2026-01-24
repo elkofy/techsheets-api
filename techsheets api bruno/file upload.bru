@@ -1,0 +1,19 @@
+meta {
+  name: Upload File
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/ingredients/upload
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  file: @file(c:\Users\daikh\Downloads\nassbin_vmSuXfniC1Y9jPPXWL3HT348m1uHcSLbytRzG3ZlwhpyKjvUG4mcKgPZVHVOqFfC.xlsx)
+}
+
+body:file {
+  file: @file(c:\Users\daikh\Downloads\nassbin_vmSuXfniC1Y9jPPXWL3HT348m1uHcSLbytRzG3ZlwhpyKjvUG4mcKgPZVHVOqFfC.xlsx) @contentType(application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
+}
