@@ -42,14 +42,6 @@ Get started with Techsheets Api by {write the first step a user needs to start u
 Fell free to open a Pull Request and I will treat it
 
 
-## How to get help
-
-{Include links and brief descriptions for support resources. Examples provided in README template guide.}
-
-* Reference link 1
-* Reference link 2
-* Reference link 3...
-
 ## Terms of use
 
 TechSheets api is licensed under Mit licence.
