@@ -1,9 +1,9 @@
 package pkg
 
 import (
-	"time"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"time"
 )
 
 // DOMAIN
@@ -21,14 +21,15 @@ import (
 
 type Ingredient struct {
 	gorm.Model
-	Name          string `form:"name" json:"name" `
-	Label         string `form:"label" json:"label"`
-	Allergen      string `form:"allergen" json:"allergen"`
-	Unit          string `form:"unit" json:"unit"`
-	HT_Price      float64`form:"htPrice" json:"htPrice"`
-	TTC_price     float64 `form:"ttcPrice" json:"ttcPrice"`
-	TVA_rate      float64 `form:"tvaRate" json:"tvaRate"`
-	Supplier      string `form:"supplier" json:"supplier"`
+	Name       string  `form:"name" json:"name" `
+	Ref        string  `form:"ref" json:"ref"`
+	Allergen   string  `form:"allergen" json:"allergen"`
+	Unit       string  `form:"unit" json:"unit"`
+	Unit_Price float64 `form:"unitPrice" json:"unitPrice"`
+	Category   string  `form:"category" json:"category"`
+	Details  string `form:"details" json:"details"`
+	Supplier   string  `form:"supplier" json:"supplier"`
+	Energy   float64  `form:"energy" json:"energy"`
 }
 
 type RecipeIngredient struct {
@@ -67,10 +68,10 @@ type Recipe struct {
 	Name            string
 	IngredientUUIDs []uuid.UUID
 	Steps           []Step
-	Timings           Timings
+	Timings         Timings
 	Equipements     []string
-	createdAt     time.Time
-	lastUpdatedAt time.Time
+	createdAt       time.Time
+	lastUpdatedAt   time.Time
 }
 
 type Mold struct {
@@ -80,63 +81,62 @@ type Mold struct {
 	Capacity float64
 }
 
-
 type AdditionalRecipeSteps struct {
-	UUID           uuid.UUID
-	RecipeUUID     uuid.UUID
+	UUID               uuid.UUID
+	RecipeUUID         uuid.UUID
 	TechnicalSheetUUID uuid.UUID
-	StepUUID uuid.UUID
+	StepUUID           uuid.UUID
 }
 
 type TechnicalSheet struct {
-	UUID uuid.UUID
-	Name string
-	Description string
-	Mold Mold
-	Recipes []Recipe
-	Conservation string
-	ImageUrl string
-	FinishingSteps []Step
+	UUID                  uuid.UUID
+	Name                  string
+	Description           string
+	Mold                  Mold
+	Recipes               []Recipe
+	Conservation          string
+	ImageUrl              string
+	FinishingSteps        []Step
 	AdditionalRecipeSteps []AdditionalRecipeSteps
-	Yield Yield
+	Yield                 Yield
 }
 
 type Type string
 
 const (
-	TypeSlice Type = "Part"
-	TypeRamequin  Type = "Ramequin"
+	TypeSlice    Type = "Part"
+	TypeRamequin Type = "Ramequin"
 )
 
-type Portion struct{
-	Type Type
+type Portion struct {
+	Type     Type
 	quantity int32
 }
 type Yield struct {
 	Servings int32
-	Portion Portion
+	Portion  Portion
 }
 
 type Timings struct {
-    Preparation Timing `json:"preparation"`
-    Cooking     Timing `json:"cooking"`
-    Baking      BakeTiming `json:"baking"`
-    Resting     Timing `json:"resting"`
-    TotalTime   int    `json:"totalTime"`
+	Preparation Timing     `json:"preparation"`
+	Cooking     Timing     `json:"cooking"`
+	Baking      BakeTiming `json:"baking"`
+	Resting     Timing     `json:"resting"`
+	TotalTime   int        `json:"totalTime"`
 }
 type Timing struct {
-    Duration    int    `json:"duration"`
-    Unit        string `json:"unit"`
-    Description string `json:"description,omitempty"`
+	Duration    int    `json:"duration"`
+	Unit        string `json:"unit"`
+	Description string `json:"description,omitempty"`
 }
 type BakeTiming struct {
-    Duration    int         `json:"duration"`
-    Unit        string      `json:"unit"`
-    Temperature Temperature `json:"temperature"`
+	Duration    int         `json:"duration"`
+	Unit        string      `json:"unit"`
+	Temperature Temperature `json:"temperature"`
 }
 type Temperature struct {
-    Value int    `json:"value"`
-    Unit  string `json:"unit"`
+	Value int    `json:"value"`
+	Unit  string `json:"unit"`
 }
 
 //DTO
