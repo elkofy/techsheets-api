@@ -1,0 +1,363 @@
+basePath: /
+definitions:
+  pkg.Ingredient:
+    type: object
+  pkg.Recipe:
+    type: object
+  pkg.TechnicalSheet:
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: REST API for managing ingredients, recipes and technical sheets.
+  title: TechSheets API
+  version: "1.0"
+paths:
+  /ingredient:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ingredient to create
+        in: body
+        name: ingredient
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.Ingredient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Ingredient'
+      summary: Create ingredient
+      tags:
+      - ingredients
+  /ingredient/{id}:
+    delete:
+      parameters:
+      - description: Ingredient ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "304":
+          description: Not Modified
+      summary: Delete ingredient by ID
+      tags:
+      - ingredients
+    get:
+      parameters:
+      - description: Ingredient ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Ingredient'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get ingredient by ID
+      tags:
+      - ingredients
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Ingredient ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated ingredient
+        in: body
+        name: ingredient
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.Ingredient'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Ingredient'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Update ingredient by ID
+      tags:
+      - ingredients
+  /ingredients:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pkg.Ingredient'
+            type: array
+      summary: List all ingredients
+      tags:
+      - ingredients
+  /ingredients/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: Excel file (.xlsx)
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Bulk import ingredients from Excel file
+      tags:
+      - ingredients
+  /recipe:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Recipe to create
+        in: body
+        name: recipe
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.Recipe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Recipe'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create recipe
+      tags:
+      - recipes
+  /recipe/{id}:
+    delete:
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete recipe by ID
+      tags:
+      - recipes
+    get:
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Recipe'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get recipe by ID
+      tags:
+      - recipes
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated recipe
+        in: body
+        name: recipe
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.Recipe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.Recipe'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Update recipe by ID
+      tags:
+      - recipes
+  /recipes:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pkg.Recipe'
+            type: array
+      summary: List all recipes
+      tags:
+      - recipes
+  /technicalsheet:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Technical sheet to create
+        in: body
+        name: sheet
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.TechnicalSheet'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.TechnicalSheet'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create technical sheet
+      tags:
+      - technical-sheets
+  /technicalsheet/{id}:
+    delete:
+      parameters:
+      - description: Technical sheet ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete technical sheet by ID
+      tags:
+      - technical-sheets
+    get:
+      parameters:
+      - description: Technical sheet ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.TechnicalSheet'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get technical sheet by ID
+      tags:
+      - technical-sheets
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Technical sheet ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated technical sheet
+        in: body
+        name: sheet
+        required: true
+        schema:
+          $ref: '#/definitions/pkg.TechnicalSheet'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pkg.TechnicalSheet'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Update technical sheet by ID
+      tags:
+      - technical-sheets
+  /technicalsheets:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/pkg.TechnicalSheet'
+            type: array
+      summary: List all technical sheets
+      tags:
+      - technical-sheets
+swagger: "2.0"

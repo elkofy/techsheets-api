@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/Users/Nassim/Documents/dev/techsheets-api && go build ./... 2>&1)",
+      "Bash(cd /c/Users/Nassim/Documents/dev/techsheets-api && /c/Users/Nassim/AppData/Local/Programs/Go/bin/go build ./... 2>&1)",
+      "Bash(cd /c/Users/Nassim/Documents/dev/techsheets-api && go get github.com/swaggo/gin-swagger && go get github.com/swaggo/files 2>&1)",
+      "Bash(echo:*)",
+      "Bash(export PATH=\"/c/Program Files/Go/bin:/c/Users/Nassim/go/bin:$PATH\" && cd /c/Users/Nassim/Documents/dev/techsheets-api && go build ./... 2>&1)",
+      "Bash(export PATH=\"/c/Program Files/Go/bin:$PATH\" && cd /c/Users/Nassim/Documents/dev/techsheets-api && go get github.com/glebarez/sqlite 2>&1)",
+      "Bash(export PATH=\"/c/Program Files/Go/bin:$PATH\" && cd /c/Users/Nassim/Documents/dev/techsheets-api && go build ./... 2>&1)",
+      "Bash(export PATH=\"/c/Program Files/Go/bin:$PATH\" && cd /c/Users/Nassim/Documents/dev/techsheets-api && go mod tidy 2>&1)"
+    ]
+  }
+}
