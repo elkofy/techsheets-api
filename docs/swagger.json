@@ -538,17 +538,427 @@
                     }
                 }
             }
+        },
+        "/upload/image": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "uploads"
+                ],
+                "summary": "Upload an image",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "Image file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "pkg.AdditionalRecipeSteps": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "recipeId": {
+                    "type": "integer"
+                },
+                "stepId": {
+                    "type": "integer"
+                },
+                "technicalSheetId": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.BakeTiming": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "integer"
+                },
+                "temperature": {
+                    "$ref": "#/definitions/pkg.Temperature"
+                },
+                "unit": {
+                    "type": "string"
+                }
+            }
+        },
         "pkg.Ingredient": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "allergen": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "energy": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "ref": {
+                    "type": "string"
+                },
+                "supplier": {
+                    "type": "string"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "unitPrice": {
+                    "type": "number"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.Mold": {
+            "type": "object",
+            "properties": {
+                "capacity": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "shape": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.Portion": {
+            "type": "object",
+            "properties": {
+                "quantity": {
+                    "type": "integer"
+                },
+                "type": {
+                    "$ref": "#/definitions/pkg.Type"
+                }
+            }
         },
         "pkg.Recipe": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "equipements": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "imageUrl": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "recipeIngredients": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.RecipeIngredient"
+                    }
+                },
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Step"
+                    }
+                },
+                "timings": {
+                    "$ref": "#/definitions/pkg.Timings"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.RecipeIngredient": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ingredient": {
+                    "$ref": "#/definitions/pkg.Ingredient"
+                },
+                "ingredientId": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "number"
+                },
+                "recipeId": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.Step": {
+            "type": "object",
+            "properties": {
+                "actionDetail": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "recipeId": {
+                    "type": "integer"
+                },
+                "technicalSheetId": {
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "verb": {
+                    "$ref": "#/definitions/pkg.Verb"
+                },
+                "videoUrl": {
+                    "type": "string"
+                }
+            }
         },
         "pkg.TechnicalSheet": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "additionalRecipeSteps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.AdditionalRecipeSteps"
+                    }
+                },
+                "conservation": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "finishingSteps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Step"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "imageUrl": {
+                    "type": "string"
+                },
+                "mold": {
+                    "$ref": "#/definitions/pkg.Mold"
+                },
+                "moldId": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "recipes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Recipe"
+                    }
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "yield": {
+                    "$ref": "#/definitions/pkg.Yield"
+                }
+            }
+        },
+        "pkg.Temperature": {
+            "type": "object",
+            "properties": {
+                "unit": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pkg.Timing": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.Timings": {
+            "type": "object",
+            "properties": {
+                "baking": {
+                    "$ref": "#/definitions/pkg.BakeTiming"
+                },
+                "cooking": {
+                    "$ref": "#/definitions/pkg.Timing"
+                },
+                "preparation": {
+                    "$ref": "#/definitions/pkg.Timing"
+                },
+                "resting": {
+                    "$ref": "#/definitions/pkg.Timing"
+                },
+                "totalTime": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pkg.Type": {
+            "type": "string",
+            "enum": [
+                "Part",
+                "Ramequin"
+            ],
+            "x-enum-varnames": [
+                "TypeSlice",
+                "TypeRamequin"
+            ]
+        },
+        "pkg.Verb": {
+            "type": "string",
+            "enum": [
+                "Couper",
+                "Melanger",
+                "Cuire",
+                "Amalgamer",
+                "Monter"
+            ],
+            "x-enum-varnames": [
+                "VerbChop",
+                "VerbMix",
+                "VerbBake",
+                "VerbBoil",
+                "VerbFry"
+            ]
+        },
+        "pkg.Yield": {
+            "type": "object",
+            "properties": {
+                "portion": {
+                    "$ref": "#/definitions/pkg.Portion"
+                },
+                "servings": {
+                    "type": "integer"
+                }
+            }
         }
     }
 }

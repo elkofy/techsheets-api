@@ -390,7 +390,7 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Credentials", "true")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
-		c.Header("Access-Control-Allow-Methods", "POST,HEAD,PATCH, OPTIONS, GET, PUT")
+		c.Header("Access-Control-Allow-Methods", "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE")
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
@@ -399,6 +399,28 @@ func CORSMiddleware() gin.HandlerFunc {
 
 		c.Next()
 	}
+}
+
+// @Summary     Upload an image
+// @Tags        uploads
+// @Accept      multipart/form-data
+// @Produce     json
+// @Param       file formData file true "Image file"
+// @Success     200 {object} map[string]string
+// @Failure     400 {object} map[string]interface{}
+// @Router      /upload/image [post]
+func uploadImage(c *gin.Context) {
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	savePath := "./files/images/" + file.Filename
+	if err := c.SaveUploadedFile(file, savePath); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"url": "http://localhost:8080/files/images/" + file.Filename})
 }
 
 // @title           TechSheets API
@@ -432,6 +454,8 @@ func main() {
 	router.PATCH("/technicalsheet/:id", updateTechnicalSheetById)
 	router.DELETE("/technicalsheet/:id", deleteTechnicalSheetById)
 
+	router.POST("/upload/image", uploadImage)
+	router.Static("/files/images", "./files/images")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	db, err := gorm.Open(sqlite.Open("techsheets.db"), &gorm.Config{})

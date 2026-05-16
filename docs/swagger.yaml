@@ -1,10 +1,255 @@
 basePath: /
 definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  pkg.AdditionalRecipeSteps:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      recipeId:
+        type: integer
+      stepId:
+        type: integer
+      technicalSheetId:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  pkg.BakeTiming:
+    properties:
+      duration:
+        type: integer
+      temperature:
+        $ref: '#/definitions/pkg.Temperature'
+      unit:
+        type: string
+    type: object
   pkg.Ingredient:
+    properties:
+      allergen:
+        type: string
+      category:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      details:
+        type: string
+      energy:
+        type: number
+      id:
+        type: integer
+      name:
+        type: string
+      ref:
+        type: string
+      supplier:
+        type: string
+      unit:
+        type: string
+      unitPrice:
+        type: number
+      updatedAt:
+        type: string
+    type: object
+  pkg.Mold:
+    properties:
+      capacity:
+        type: number
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      shape:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  pkg.Portion:
+    properties:
+      quantity:
+        type: integer
+      type:
+        $ref: '#/definitions/pkg.Type'
     type: object
   pkg.Recipe:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      equipements:
+        items:
+          type: string
+        type: array
+      id:
+        type: integer
+      imageUrl:
+        type: string
+      name:
+        type: string
+      recipeIngredients:
+        items:
+          $ref: '#/definitions/pkg.RecipeIngredient'
+        type: array
+      steps:
+        items:
+          $ref: '#/definitions/pkg.Step'
+        type: array
+      timings:
+        $ref: '#/definitions/pkg.Timings'
+      updatedAt:
+        type: string
+    type: object
+  pkg.RecipeIngredient:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      ingredient:
+        $ref: '#/definitions/pkg.Ingredient'
+      ingredientId:
+        type: integer
+      quantity:
+        type: number
+      recipeId:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  pkg.Step:
+    properties:
+      actionDetail:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      recipeId:
+        type: integer
+      technicalSheetId:
+        type: integer
+      updatedAt:
+        type: string
+      verb:
+        $ref: '#/definitions/pkg.Verb'
+      videoUrl:
+        type: string
     type: object
   pkg.TechnicalSheet:
+    properties:
+      additionalRecipeSteps:
+        items:
+          $ref: '#/definitions/pkg.AdditionalRecipeSteps'
+        type: array
+      conservation:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      description:
+        type: string
+      finishingSteps:
+        items:
+          $ref: '#/definitions/pkg.Step'
+        type: array
+      id:
+        type: integer
+      imageUrl:
+        type: string
+      mold:
+        $ref: '#/definitions/pkg.Mold'
+      moldId:
+        type: integer
+      name:
+        type: string
+      recipes:
+        items:
+          $ref: '#/definitions/pkg.Recipe'
+        type: array
+      updatedAt:
+        type: string
+      yield:
+        $ref: '#/definitions/pkg.Yield'
+    type: object
+  pkg.Temperature:
+    properties:
+      unit:
+        type: string
+      value:
+        type: integer
+    type: object
+  pkg.Timing:
+    properties:
+      description:
+        type: string
+      duration:
+        type: integer
+      unit:
+        type: string
+    type: object
+  pkg.Timings:
+    properties:
+      baking:
+        $ref: '#/definitions/pkg.BakeTiming'
+      cooking:
+        $ref: '#/definitions/pkg.Timing'
+      preparation:
+        $ref: '#/definitions/pkg.Timing'
+      resting:
+        $ref: '#/definitions/pkg.Timing'
+      totalTime:
+        type: integer
+    type: object
+  pkg.Type:
+    enum:
+    - Part
+    - Ramequin
+    type: string
+    x-enum-varnames:
+    - TypeSlice
+    - TypeRamequin
+  pkg.Verb:
+    enum:
+    - Couper
+    - Melanger
+    - Cuire
+    - Amalgamer
+    - Monter
+    type: string
+    x-enum-varnames:
+    - VerbChop
+    - VerbMix
+    - VerbBake
+    - VerbBoil
+    - VerbFry
+  pkg.Yield:
+    properties:
+      portion:
+        $ref: '#/definitions/pkg.Portion'
+      servings:
+        type: integer
     type: object
 host: localhost:8080
 info:
@@ -360,4 +605,31 @@ paths:
       summary: List all technical sheets
       tags:
       - technical-sheets
+  /upload/image:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: Image file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Upload an image
+      tags:
+      - uploads
 swagger: "2.0"
